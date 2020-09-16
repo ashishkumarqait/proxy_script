@@ -126,7 +126,7 @@ getCookie(cookie => {
     } else {
       // else simply route to frontend app
       proxy.web(req, res, {
-        target: 'http://localhost:3000'
+        target: `http://localhost:${options.spaPort}`
       });
     }
   }).listen(9000);
