@@ -67,6 +67,7 @@ const getCookie = async (onFound) => {
 getCookie(cookie => {
   const ApiProxyCall = async (path, method, cookie, data = {}, onComplete) => {
     try {
+      console.log("ROUTING TO :", API_ENV_HOST + path)
       const rp = await axios({
         method,
         url: API_ENV_HOST + path,
@@ -93,7 +94,7 @@ getCookie(cookie => {
   const proxy = httpProxy.createProxyServer({ target: 'http://localhost:9000' }).listen(options.port);
 
   http.createServer(function (req, res) {
-    const path = url.parse(req.url).pathname
+    const path = url.parse(req.url).path
     req.headers.cookie = cookie
     // this is a api call should go to dev/uat environment
     if (path.startsWith("/api")) {
