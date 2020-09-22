@@ -100,8 +100,8 @@ getCookie(cookie => {
     if (path.startsWith("/api")) {
       if (req.method.toUpperCase() !== 'GET') {
         const chunks = [];
-        request.on('data', chunk => chunks.push(chunk));
-        request.on('end', () => {
+        req.on('data', chunk => chunks.push(chunk));
+        req.on('end', () => {
           const data = Buffer.concat(chunks);
           ApiProxyCall(path, req.method, cookie, data, function (rp) {
             if (rp.error) {
